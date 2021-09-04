@@ -1,0 +1,19 @@
+{
+  "name": "club-central",
+  "version": "1.0.0",
+  "description": "A web application for Club Central project.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mansi-07/Club-Central.git"
+  },
+  "author": "Mansi Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mansi-07/Club-Central/issues"
+  },
+  "homepage": "https://github.com/mansi-07/Club-Central#readme"
+}
