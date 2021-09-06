@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-connectDatabase()
+await connectDatabase()
 
 const app = express()
 

@@ -23,6 +23,9 @@ const UserSchema = mongoose.Schema({
         type:Number,
         required:true
     },
+    resumeLink: {
+        type: String,
+    }
     // preferences:{
     //     type:
     // }

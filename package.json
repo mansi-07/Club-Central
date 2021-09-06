@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "A web application for Club Central project.",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node backend-code/backend-code",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon backend-code/backend-code",
+    "seedr":"node backend-code/seedr"
   },
   "repository": {
     "type": "git",
