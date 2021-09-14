@@ -16,14 +16,21 @@ const globalUserSchema = mongoose.Schema({
         type:String,
         required:true
     },
+    instituteName:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Institute'
+    },
     isAdmin:{
         type:Boolean,
-        required:true,
         default:false
     },
     isSuperAdmin:{
         type:Boolean,
-        required:true,
+        default:false
+    },
+    isAppMaintainer:{
+        type:Boolean,
         default:false
     },
 },{

@@ -3,10 +3,12 @@ import connectDatabase from './configurations/databaseConfig.js'
 import globalUsers from './databaseFakerScript/globalUsers.js'
 import users from './databaseFakerScript/users.js'
 import clubs from './databaseFakerScript/clubs.js'
+import institutes from './databaseFakerScript/institute.js'
 
 import GlobalUser from './models/globalUserModel.js'
 import User from './models/userModel.js'
 import Club from './models/clubModel.js'
+import Institute from './models/instituteModel.js'
 
 dotenv.config()
 

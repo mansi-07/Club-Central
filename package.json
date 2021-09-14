@@ -5,10 +5,12 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node backend-code/backend-code",
+    "start": "node server/server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon backend-code/backend-code",
-    "seedr":"node backend-code/seedr"
+    "server": "nodemon server/server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "seedr":"node server/seedr"
   },
   "repository": {
     "type": "git",

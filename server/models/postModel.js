@@ -25,6 +25,6 @@ const postSchema = mongoose.Schema({
     timestamps: true
 })
 
-const Sig = mongoose.model('Sig', sigSchema)
+const Post = mongoose.model('Post', postSchema)
 
-export default Sig
+export default Post

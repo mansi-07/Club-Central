@@ -16,6 +16,11 @@ const globalUsers = [
         email: 'userDummy@gmail.com',
         password: 'userDummy',
     },
+    {
+        username: 'appMaintainerDummy',
+        email: 'appMaintainerDummy@gmail.com',
+        password: 'appMaintainerDummy',
+    },
 ]
 
 export default globalUsers
