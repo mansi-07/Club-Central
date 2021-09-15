@@ -28,11 +28,7 @@ const globalUserSchema = mongoose.Schema({
     isSuperAdmin:{
         type:Boolean,
         default:false
-    },
-    isAppMaintainer:{
-        type:Boolean,
-        default:false
-    },
+    }
 },{
     timestamps: true
 })
