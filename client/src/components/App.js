@@ -1,11 +1,15 @@
-import React from 'react';
+import React from 'react'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
-class App extends React.Component {
-    render(){
-        return (
-            <div>Hello</div>
-        );
-    }
+import LandingPage from './LandingPage'
+
+export default function App() {
+    return(
+        <Router>
+            <Switch>
+            <Route exact path='/' component={LandingPage} />
+            </Switch>
+        </Router>
+    );
+
 }
-
-export default App;
