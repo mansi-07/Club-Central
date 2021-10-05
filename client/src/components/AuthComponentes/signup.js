@@ -25,9 +25,10 @@ const Signup = () => {
         console.log({username,password,email,institute})
         axios.post("/api/auth/signup", {username,password,email,institute} )
             .then((res) => {
-                if (res.status === 200) {
-                    history.push("/signup")
+                if (res.status === 201) {
                     alert("Signup Successful!")
+                    history.push("/signin")
+                    
               }
             })
             .catch(err => {
