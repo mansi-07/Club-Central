@@ -1,20 +1,23 @@
+import bcrypt from 'bcryptjs'
+const rounds = 12
+
 const globalUsers = [
     {
         username: 'supperDummy',
         email: 'supperDummy@gmail.com',
-        password: 'supperDummy',
+        password: bcrypt.hashSync('supperDummy'),
         isSuperAdmin: true
     },
     {
         username: 'clubDummy',
         email: 'clubDummy@gmail.com',
-        password: 'clubDummy',
+        password: bcrypt.hashSync('clubDummy'),
         isAdmin: true
     },
     {
         username: 'userDummy',
         email: 'userDummy@gmail.com',
-        password: 'userDummy',
+        password: bcrypt.hashSync('userDummy'),
     }
 ]
 
