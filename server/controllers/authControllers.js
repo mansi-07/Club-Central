@@ -42,16 +42,11 @@ export const signUpUser =  asyncHandler(async(req, res) =>{
         res.status(400).send({msg: "The username is already taken."})
         throw new Error('The username is already taken.')
     }
-    const institute_id = await Institute.findOne({name: institute})
-    if(!institute_id){
-        res.status(400).send({msg: "The institute does not exist."})
-        throw new Error('The institute does not exist.')
-    }
     const newUser = await GlobalUser.create({
         username: username, 
         email: email, 
         password: password, 
-        instituteName: institute_id._id
+        instituteName: institute
     })
 
     if(newUser){

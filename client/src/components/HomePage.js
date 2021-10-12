@@ -1,11 +1,10 @@
 import React from 'react'
+import Navbar from './partials/Navbar.js'
 
 const HomePage = ({user}) => {
     console.log(user)
     return (
-        <div>
-            hey {user.username}
-        </div>
+        <Navbar user={user}/>
     )
 }
 export default HomePage;
