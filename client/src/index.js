@@ -1,6 +1,8 @@
 import React from "react";
 import {render} from "react-dom";
 import App from "./components/App";
-import 'materialize-css/dist/css/materialize.min.css'
+import "bootstrap-icons/font/bootstrap-icons.css";
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.bundle'
 
 render(<App />, document.getElementById("root"));
