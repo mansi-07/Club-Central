@@ -1,0 +1,9 @@
+.App {
+  text-align: center;
+  z-index: -1;
+  margin-top: 65px;
+}
+
+h1{
+  color: rgb(2, 2, 44)
+}
