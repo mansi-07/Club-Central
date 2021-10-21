@@ -1,2 +1,3 @@
-npm i --save react-big-calendar command for calender
-npm i react-datepicker command for date-picker
+## 'commnds to install'
+# npm i --save react-big-calendar - for calender\
+# npm i react-datepicker - for date-picker\
