@@ -1,0 +1,77 @@
+.Nav {
+
+  background-color: #4FC3F7;
+
+  border-bottom: 5px solid rgba(0, 0, 0, 0.0975);
+
+  position: fixed;
+
+  top: 0;
+
+  width: 100%;
+
+z-index: 1;  
+
+  height: 60px;
+
+}
+
+.Nav-menus {
+
+  display: flex;
+
+  float: left;
+
+  flex-direction: row;
+
+  height: 77px;
+
+  width: 100%;
+
+  margin: 0 auto;
+
+  padding: 5px 10px;
+
+}
+
+.Nav-brand {
+  padding-top: 0px;
+}
+
+.Nav-brand .links { 
+  float: right;
+  padding-top: 15px;
+  margin-right: 0px;
+}
+
+.Nav-brand a {
+  text-decoration: none;
+  padding: 10px;
+}
+.Nav-brand a:hover {
+  color: #f1356d;
+}
+
+.Nav-brand-logo {
+
+  display: inline-block;
+
+  background-position: 0px 0px;
+
+  background-image: url(logo.png);
+
+  background-size: 60px 60px;
+
+  background-repeat: no-repeat;
+
+  height: 60px;
+
+  width: 1000px;
+
+  max-width: auto;
+
+  text-indent: 50%;
+
+  font-size: 15px;
+  
+}
