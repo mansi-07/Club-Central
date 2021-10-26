@@ -4,6 +4,7 @@ import Signin from './AuthComponentes/signin.js'
 import Signup from './AuthComponentes/signup.js'
 import SignOut from './AuthComponentes/signout.js'
 import HomePage from './HomePage'
+import AddPost from './AddPost'
 
 export default function App() {
     const [user,setSignInUser] = useState({})
@@ -31,6 +32,11 @@ export default function App() {
             </Route>
             <Route exact path="/signout">
                 <SignOut setSigninUser={setSignInUser} />
+            </Route>
+            <Route exact path="/clubadmin/addpost">
+                {
+                    <AddPost user={user}/>
+                }
             </Route>
             </Switch>
         </Router>

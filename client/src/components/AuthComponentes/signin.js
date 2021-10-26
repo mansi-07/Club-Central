@@ -7,17 +7,19 @@ import { Link , useHistory } from 'react-router-dom'
 const Signin = ({setSigninUser}) => {
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
-    
+    //const [token, setToken] = useState('')
+
     const history = useHistory()
 
     const signInSubmit = (event) => {
-        console.log({username,password})
+        
         event.preventDefault()
         axios.post("/api/auth/signin", {username,password} )
         .then((res) => {
             if (res.status === 200) {
                 console.log(res.data)
                 setSigninUser(res.data)
+                //console.log(user)
                 if(res.data.isAdmin){
                     history.push("/clubadmin")
                 }

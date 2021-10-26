@@ -1,10 +1,10 @@
 import React from 'react'
 import Navbar from './partials/Navbar.js'
-import Post from './partials/Post';
+import AddPostForm from './partials/AddPostForm';
 import Footer from './partials/Footer';
 
-const HomePage = ({ user }) => {
-    //console.log(user)
+const AddPost = ({ user }) => {
+    var token = user.token
     return (
         <div>
 
@@ -12,11 +12,11 @@ const HomePage = ({ user }) => {
 
             <div>
 
-                <Post user={user}/>
+                <AddPostForm token={token} />
 
             </div>
             <Footer />
         </div>
     )
 }
-export default HomePage;
+export default AddPost;

@@ -41,6 +41,12 @@ const ClubAdminView = () => {
                     <Link className="nav-link active" aria-current="page">club admin</Link>
                 </li>
                 <li className="nav-item">
+                    <Link className="nav-link" to="/clubadmin">Home</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/clubadmin/addpost">Add Post</Link>
+                </li>
+                <li className="nav-item">
                     <Link className="nav-link" to="/signout">Sign Out</Link>
                 </li>
             </ul>
@@ -64,7 +70,7 @@ const UserView = () => {
 }
 
 const Navbar = ({user}) => {
-    console.log(user);
+    //console.log(user);
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">

@@ -16,11 +16,17 @@ const postSchema = mongoose.Schema({
     imageLink : {
         type: String
     },
-    comments : {
+    comments : [{
         commentMessage: {type: String, required: true},
-        commentBy: {type: mongoose.Schema.Types.ObjectId, required: true, ref: GlobalUser},
+        commentBy: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'GlobalUser'},
         commentAt: {type: Date, default: Date.now}
+    }],
+    instituteId :{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Institute'
     }
+
 },{
     timestamps: true
 })

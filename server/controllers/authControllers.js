@@ -12,13 +12,17 @@ export const signInUser =  asyncHandler(async(req, res) =>{
    const {username, password} = req.body
    const user = await GlobalUser.findOne({username})
    if(user && (await user.passwordVerification(password))){
+    const token= generateToken(user)
+    //console.log(token)
+    //res.json({token,user:{_id,username,email,followers,following,pic}})
     res.send({
+        token,
         user_id: user._id,
         username: user.username,
         instituteName: user.instituteName,
         isAdmin:user.isAdmin,
         isSuperAdmin:user.isSuperAdmin,
-        instituteName: user.instituteName,
+        instituteName: user.instituteName
     })
    }else{
        res.status(401).send({msg: "Invalid combination of username and password"})
