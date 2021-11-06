@@ -4,6 +4,8 @@ import Signin from './AuthComponentes/signin.js'
 import Signup from './AuthComponentes/signup.js'
 import SignOut from './AuthComponentes/signout.js'
 import HomePage from './HomePage'
+import EditProfile from './userComponents/EditProfile.js'
+import AddEvent from './eventsComponentes/AddEvent.js'
 
 export default function App() {
     const [user,setSignInUser] = useState({})
@@ -31,6 +33,12 @@ export default function App() {
             </Route>
             <Route exact path="/signout">
                 <SignOut setSigninUser={setSignInUser} />
+            </Route>
+            <Route exact path="/editprofile/:id">
+                <EditProfile user={user}/>
+            </Route>
+            <Route exact path="/addevent">
+                <AddEvent user={user}/>
             </Route>
             </Switch>
         </Router>

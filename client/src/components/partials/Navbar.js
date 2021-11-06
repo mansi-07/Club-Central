@@ -2,22 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png'
 
-// const AppMaintainerView = () => {
-//     return (
-//         <>
-//             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-//                 <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-//                     <li className="nav-item">
-//                         <Link className="nav-link active" aria-current="page" to="/appmaintainer">Institutes</Link>
-//                     </li>
-//                     <li className="nav-item">
-//                         <Link className="nav-link">Log Out</Link>
-//                     </li>
-//                 </ul>
-//             </div>
-//         </>
-//     );
-// }
 const SuperAdminView = () => {
     return (
         <>
@@ -41,6 +25,9 @@ const ClubAdminView = () => {
                     <Link className="nav-link active" aria-current="page">club admin</Link>
                 </li>
                 <li className="nav-item">
+                    <Link className="nav-link" to="/addevent">Add Event</Link>
+                </li>
+                <li className="nav-item">
                     <Link className="nav-link" to="/signout">Sign Out</Link>
                 </li>
             </ul>
@@ -48,12 +35,15 @@ const ClubAdminView = () => {
     );
 }
 
-const UserView = () => {
+const UserView = ({user}) => {
     return(
         <>
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                     <Link className="nav-link active" aria-current="page">user</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/editprofile/${user.user_id}`}>Edit Profile</Link>
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link" to="/signout">Sign Out</Link>
@@ -76,7 +66,7 @@ const Navbar = ({user}) => {
             </button>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             {
-                user.isSuperAdmin ? <SuperAdminView/> : user.isAdmin ? <ClubAdminView/> : <UserView/>
+                user.isSuperAdmin ? <SuperAdminView/> : user.isAdmin ? <ClubAdminView/> : <UserView user={user}/>
             }
             </div>
         </div>
