@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Modal from "./EditPostModal";
 
-const Post = ({ user }) => {
+const PostClubView = ({ user }) => {
   const t = user['token']
   const [data, setData] = useState([])
   const history = useHistory()
 
 
   useEffect(() => {
-    if (user.isAdmin) {
+   
       fetch('/clubpost', {
         headers: {
           "Content-Type": "application/json",
@@ -24,19 +24,7 @@ const Post = ({ user }) => {
           //console.log(result)
           setData(result.posts)
         })
-    }
-    else {
-      fetch('/allpost', {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + t
-        }
-      }).then(res => res.json())
-        .then(result => {
-          //console.log(result)
-          setData(result.posts)
-        })
-    }
+    
   })
 
   const makeComment = (commentMessage, postId) => {
@@ -123,6 +111,110 @@ const Post = ({ user }) => {
   )
 
 
+}
+
+
+
+
+const PostUserView = ({ user }) => {
+  const t = user['token']
+  const [data, setData] = useState([])
+  const history = useHistory()
+
+
+  useEffect(() => {
+   
+      fetch('/allpost', {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + t
+        }
+      }).then(res => res.json())
+        .then(result => {
+          //console.log(result)
+          setData(result.posts)
+        })
+    
+  })
+
+  const makeComment = (commentMessage, postId) => {
+    fetch('/comment', {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + t
+      },
+      body: JSON.stringify({
+        postId,
+        commentMessage
+      })
+    }).then(res => res.json())
+      .then(result => {
+        console.log(result)
+        const newData = data.map(item => {
+          if (item._id == result._id) {
+            return result
+          } else {
+            return item
+          }
+        })
+        setData(newData)
+      }).catch(err => {
+        console.log(err)
+      })
+  }
+
+  
+
+
+
+  return (
+    <div className="home">
+      {
+        data.map(item => {
+          return (
+            <div className="card home-card">
+
+              <h5>{item.club.name}
+
+              
+              </h5>
+              <div style={{ align: "left" }} className="card-image">
+                <img src={item.imageLink}></img>
+              </div>
+              <div className="card-content">
+                <h6>{item.title}</h6>
+                <p>{item.description}</p>
+                {
+                  item.comments.map(record => {
+                    <h6><span style={{ fontWeight: "400" }}>{record.commentBy.name}</span>{record.commentMessage}</h6>
+                  })
+                }
+                <form onSubmit={(e) => {
+                  e.preventDefault()
+                  makeComment(e.target[0].value, item._id)
+                }}>
+                  <input type="text" placeholder="Add comment" />
+                </form>
+              </div>
+            </div>
+
+          )
+        })
+      }
+    </div>
+
+  )
+
+
+}
+
+
+
+const Post = ({ user })=>{
+  
+  return user.isAdmin ? <PostClubView user={user}/> : <PostUserView user={user}/>
+    
 }
 
 export default Post;
