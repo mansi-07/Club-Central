@@ -10,6 +10,7 @@ import ViewSig from './ViewSig.js';
 
 import EditProfile from './userComponents/EditProfile.js'
 import AddEvent from './eventsComponentes/AddEvent.js'
+import Event from './eventsComponentes/Event.js'
 
 export default function App() {
     const [user, setSignInUser] = useState({})
@@ -58,6 +59,9 @@ export default function App() {
                 </Route>
                 <Route exact path="/addevent">
                     <AddEvent user={user} />
+                </Route>
+                <Route exact path="/events">
+                    <Event user={user} />
                 </Route>
             </Switch>
         </Router>

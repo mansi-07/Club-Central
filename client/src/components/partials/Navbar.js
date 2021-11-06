@@ -56,6 +56,9 @@ const UserView = ({ user }) => {
                     <Link className="nav-link active" aria-current="page">user</Link>
                 </li>
                 <li className="nav-item">
+                    <Link className="nav-link" to="/events">Events</Link>
+                </li>
+                <li className="nav-item">
                     <Link className="nav-link" to={`/editprofile/${user.user_id}`}>Edit Profile</Link>
                 </li>
                 <li className="nav-item">

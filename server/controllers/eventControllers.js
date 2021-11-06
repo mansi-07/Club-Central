@@ -31,15 +31,12 @@ export const getEvent = asyncHandler(async(req,res) => {
     const instituteID = req.body.instituteID
     
     const success = await Event.find({instituteID: instituteID});
-    console.log("Fucks")
     console.log(instituteID)
     if(success){
-        console.log("Sucks")
         res.status(201).json(success);
         
     } else {
         res.status(404)
         throw new Error('Error')
     }
-    
 })

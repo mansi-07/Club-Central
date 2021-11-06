@@ -12,7 +12,7 @@ export const signInUser =  asyncHandler(async(req, res) =>{
    const {username, password} = req.body
    const user = await GlobalUser.findOne({username})
    if(user && (await user.passwordVerification(password))){
-    const token= generateToken(user)
+    const token= generateToken(user._id)
     console.log(token)
     //res.json({token,user:{_id,username,email,followers,following,pic}})
     res.send({
