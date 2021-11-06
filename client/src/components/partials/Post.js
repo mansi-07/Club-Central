@@ -14,18 +14,20 @@ const PostClubView = ({ user }) => {
 
   useEffect(() => {
 
-    fetch('/api/post/clubpost', {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + t
-      }
-    }).then(res => res.json())
-      .then(result => {
-        //console.log(result)
-        setData(result.posts)
+    
+      axios.get('/api/post/clubpost',{headers: { "Authorization": `Bearer ${t}` }})
+      .then((res) => {
+        //console.log(res.data)
+        setData(res.data.posts)
+      })
+      .catch(err => {
+        console.log(err)
+    
       })
 
   })
+
+  
 
   const makeComment = (commentMessage, postId) => {
     fetch('/api/post/comment', {
@@ -57,6 +59,7 @@ const PostClubView = ({ user }) => {
   const deletePost = (postId) => {
     axios.delete(`/api/post/deletepost/${postId}`, { headers: { "Authorization": `Bearer ${t}` } })
       .then((res) => {
+        console.log(res)
         alert("Deleted successfully!")
         history.push("/clubadmin")
       })
@@ -124,15 +127,13 @@ const PostUserView = ({ user }) => {
 
   useEffect(() => {
 
-    fetch('/api/post/allpost', {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + t
-      }
-    }).then(res => res.json())
-      .then(result => {
-        //console.log(result)
-        setData(result.posts)
+    axios.get('/api/post/a;;post',{headers: { "Authorization": `Bearer ${t}` }})
+      .then((res) => {
+        //console.log(res.data)
+        setData(res.data.posts)
+      })
+      .catch(err => {
+        console.log(err)
       })
 
   })

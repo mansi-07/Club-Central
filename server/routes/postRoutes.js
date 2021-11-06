@@ -102,25 +102,18 @@ router.put('/comment',checklogin,(req,res)=>{
 
 
 router.delete('/deletepost/:postId',checklogin,(req,res)=>{
-    // Club.findOne({ username: req.user.id}, function (err, club) {
-    //     if (err) {
-    //         console.log(err);
-    //         return
-    //     }
-        Post.findOneAndDelete({ _id:req.params.postId})
-        .exec((err,post)=>{
-            if(err){
-                return res.status(422).json({error:err})
+
+    const id = mongoose.Types.ObjectId(req.params.postId);
+    console.log(id)
+        Post.findOneAndDelete({ _id:id},function(err,result){
+            if(err||!result){
+                return res.status(422).json({error:err,result:result,postId:id})
             }
             else{
                 console.log(result)
                 res.status(201).json(result)
             }
         })
-
-    // })
-
-   
 })
 
 
