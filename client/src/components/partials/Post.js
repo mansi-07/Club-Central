@@ -13,22 +13,22 @@ const PostClubView = ({ user }) => {
 
 
   useEffect(() => {
-   
-      fetch('/clubpost', {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + t
-        }
-      }).then(res => res.json())
-        .then(result => {
-          //console.log(result)
-          setData(result.posts)
-        })
-    
+
+    fetch('/api/post/clubpost', {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + t
+      }
+    }).then(res => res.json())
+      .then(result => {
+        //console.log(result)
+        setData(result.posts)
+      })
+
   })
 
   const makeComment = (commentMessage, postId) => {
-    fetch('/comment', {
+    fetch('/api/post/comment', {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,7 @@ const PostClubView = ({ user }) => {
   }
 
   const deletePost = (postId) => {
-    axios.delete(`/deletepost/${postId}`, { headers: { "Authorization": `Bearer ${t}` } })
+    axios.delete(`/api/post/deletepost/${postId}`, { headers: { "Authorization": `Bearer ${t}` } })
       .then((res) => {
         alert("Deleted successfully!")
         history.push("/clubadmin")
@@ -80,7 +80,7 @@ const PostClubView = ({ user }) => {
 
                 <i style={{ float: "right", cursor: "pointer" }} class="material-icons ed-icons" onClick={() => deletePost(item._id)}>delete</i>
                 <i style={{ float: "right", cursor: "pointer" }} class="material-icons ed-icons">edit</i>
-                
+
               </h5>
               <Modal />
               <div style={{ align: "left" }} className="card-image">
@@ -123,18 +123,18 @@ const PostUserView = ({ user }) => {
 
 
   useEffect(() => {
-   
-      fetch('/allpost', {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + t
-        }
-      }).then(res => res.json())
-        .then(result => {
-          //console.log(result)
-          setData(result.posts)
-        })
-    
+
+    fetch('/api/post/allpost', {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + t
+      }
+    }).then(res => res.json())
+      .then(result => {
+        //console.log(result)
+        setData(result.posts)
+      })
+
   })
 
   const makeComment = (commentMessage, postId) => {
@@ -164,7 +164,7 @@ const PostUserView = ({ user }) => {
       })
   }
 
-  
+
 
 
 
@@ -177,7 +177,7 @@ const PostUserView = ({ user }) => {
 
               <h5>{item.club.name}
 
-              
+
               </h5>
               <div style={{ align: "left" }} className="card-image">
                 <img src={item.imageLink}></img>
@@ -211,10 +211,10 @@ const PostUserView = ({ user }) => {
 
 
 
-const Post = ({ user })=>{
-  
-  return user.isAdmin ? <PostClubView user={user}/> : <PostUserView user={user}/>
-    
+const Post = ({ user }) => {
+
+  return user.isAdmin ? <PostClubView user={user} /> : <PostUserView user={user} />
+
 }
 
 export default Post;

@@ -38,7 +38,7 @@ const AddPost = ({ user }) => {
         event.preventDefault();
         encodeFileBase64(selectedFile[0]);
         console.log({ title, description, imageLink })
-        axios.post("/createpost", { title, description, imageLink }, { headers: { "Content-Type": "application/json", "Authorization": `Bearer ${t}` } })
+        axios.post("/api/post/createpost", { title, description, imageLink }, { headers: { "Content-Type": "application/json", "Authorization": `Bearer ${t}` } })
             .then((res) => {
                 if (res.status === 201) {
                     alert("Posted Successfully!")
