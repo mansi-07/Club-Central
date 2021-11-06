@@ -1,17 +1,21 @@
 import mongoose from 'mongoose'
-import RoundSchema from './helper_models/roundSchema'
+//import RoundSchema from './helper_models/roundSchema'
 
 const sigSchema = mongoose.Schema({
-    club :{
+    ClubName :{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Club'
     },
-    name : {
+    SigName : {
         type: String,
         required: true
     },
-    round:[RoundSchema],
+    SigDesc : {
+        type: String,
+        required: true
+    }
+    //round:[RoundSchema],
     // testLink: 
 },{
     timestamps: true

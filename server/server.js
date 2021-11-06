@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import connectDatabase from './configurations/databaseConfig.js'
 import authRoutes from './routes/authRoutes.js'
 import postRoutes from './routes/postRoutes.js'
+import sigRoutes from './routes/SigRoutes.js'
 
 dotenv.config()
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({limit: '25mb'}));
 
 app.use('/api/auth', authRoutes)
 app.use('/',postRoutes)
+app.use('/',sigRoutes)
 
 
 const PORT = process.env.PORT || 5000

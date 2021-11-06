@@ -47,6 +47,12 @@ const ClubAdminView = () => {
                     <Link className="nav-link" to="/clubadmin/addpost">Add Post</Link>
                 </li>
                 <li className="nav-item">
+                    <Link className="nav-link" to="/clubadmin/viewsig">View Sig</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/clubadmin/addsig">Add Sig</Link>
+                </li>
+                <li className="nav-item">
                     <Link className="nav-link" to="/signout">Sign Out</Link>
                 </li>
             </ul>

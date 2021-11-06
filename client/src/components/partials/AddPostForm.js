@@ -1,86 +1,79 @@
-import React,{useState,useEffect, useReducer} from "react";
-import {useHistory} from 'react-router-dom'
-import FileBase64 from 'react-file-base64'
+import React, { useState, useEffect, useReducer } from "react";
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 import '../../css/addpostform.css'
 
 
-
-
-
-
-
-const AddPost = (token) => {
-    const [title,setTitle] =useState("");
-    const [description,setDescription] =useState("");
-    const [imageLink,setImageLink] =useState("");
-    const [url,setUrl] = useState("")
+const AddPost = ({ user }) => {
+    const t = user['token']
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [selectedFile, setSelectedFile] = useState([]);
+    const [imageLink, setImageLink] = useState("");
     const history = useHistory()
 
-    useEffect(()=>{
-       if(url){
-        fetch("/createpost",{
-            method:"post",
-            headers:{
-                "Content-Type":"application/json",
-                "Authorization":"Bearer "+ token
-            },
-            body:JSON.stringify({
-                title,
-                description,
-                imageLink:url
-            })
-        })
-        .then(data=>{
-    
-           if(data.error){
-             console.log(data.error)
-           }
-           else{
-               history.push('/clubadmin');
-           }
-        }).catch(err=>{
-            console.log(err)
-        })
+    const onFileChange = (e) => {
+        setSelectedFile(e.target.files)
+        //encodeFileBase64(selectedFile[0])
     }
-    },[url])
-    const postDetails = () => {
 
-        const data = new FormData()
-       data.append("file",imageLink)
-       data.append("upload_preset","club-central")
-       data.append("cloud_name","dwijabagwe")
-       fetch("https://api.cloudinary.com/v1_1/dwijabagwe/image/upload",{
-           method:"post",
-           body:data
-       })
-        .then(res=>res.json())
-        .then(data=>{
-            setUrl(data.url)
-         })
-        .catch(err=>{
-            console.log(err)
-        })
+    const encodeFileBase64 = (file) => {
+        var reader = new FileReader();
+        if (file) {
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                var Base64 = reader.result;
+                console.log(Base64);
+                setImageLink(Base64);
+            };
+
+            reader.onerror = (error) => {
+                console.log(error);   
+            };
+        }
+
     }
-    
+
+    const postSubmit= (event) => {
+        event.preventDefault();
+        encodeFileBase64(selectedFile[0]);
+        console.log({ title, description, imageLink })
+        axios.post("/createpost", { title, description, imageLink }, { headers: { "Content-Type": "application/json", "Authorization": `Bearer ${t}` } })
+            .then((res) => {
+                if (res.status === 201) {
+                    alert("Posted Successfully!")
+                   history.push("/clubadmin")
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                alert(err.response.data.msg)
+            })
+
+
+    }
+
     return (
         <div className="card input-filed">
-            <input 
-            type="text" 
-            placeholder="title" 
-            onChange={(e)=> setTitle(e.target.value)}
-            />
-            <input 
-            type="text" 
-            placeholder="description" 
-            onChange={(e)=> setDescription(e.target.value)}
-            />
-            <div >
-                <span>Upload</span>
-                <input type="file" onChange={(e)=>setImageLink(e.target.files[0])} />
-            </div>
-            <button className="btn" onClick={()=>postDetails()}>
-                Add Post
-            </button>
+            <form onSubmit={postSubmit}>
+                <input
+                    type="text"
+                    placeholder="title"
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="description"
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+                <div >
+                    <span>Upload</span>
+                    <input type="file" onChange={onFileChange } />
+                </div>
+                <button type="submit" className="btn">
+                    Add Post
+                </button>
+            </form>
         </div>
     )
 }

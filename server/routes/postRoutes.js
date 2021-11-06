@@ -10,7 +10,7 @@ import Club from "../models/clubModel.js"
 router.post('/createpost', checklogin, (req, res) => {
     const { title, description, imageLink } = req.body
     if (!title || !description || !imageLink) {
-        return res.status(422).json({ error: "Plase add all the fields" })
+        return res.status(422).json({ error: "Please add all the fields" })
     }
 
     Club.findOne({ username: req.user.id }, function (err, club) {
@@ -27,7 +27,7 @@ router.post('/createpost', checklogin, (req, res) => {
             instituteId: req.user.instituteName
         })
         post.save().then(result => {
-            res.json({ post: result })
+            res.status(201).json({ post: result })
         })
             .catch(error => {
                 console.log(error)
@@ -37,15 +37,15 @@ router.post('/createpost', checklogin, (req, res) => {
 
 })
 
-router.get('/allpost',checklogin,(req, res) => {
+router.get('/clubpost',checklogin,(req, res) => {
 
     
-    Club.findOne({ username: req.user.id }, function (err, club) {
+    Club.findOne({ username: req.user.id}, function (err, club) {
         if (err) {
             console.log(err);
             return
         }
-        Post.find({ club: club._id})
+        Post.find({ club: club._id, instituteId: req.user.instituteName})
             .populate("club", "_id name")
             .populate("comments.commentBy", "_id name")
             .sort('-createdAt')
@@ -62,10 +62,27 @@ router.get('/allpost',checklogin,(req, res) => {
 
 
 
+
+router.get('/allpost',checklogin,(req, res) => {
+    
+    Post.find({ instituteId: req.user.instituteName})
+            .populate("club", "_id name")
+            .populate("comments.commentBy", "_id name")
+            .sort('-createdAt')
+            .then((posts) => {
+                res.json({posts})
+            }).catch(err => {
+                console.log(err)
+            })
+
+})
+
+
+
 router.put('/comment',checklogin,(req,res)=>{
     const comment={
         commentMessage:req.body.commentMessage,
-        commentBy:req.user._id
+        commentBy:req.user.id
     }
 
     Post.findByIdAndUpdate(req.body.postId,{
@@ -77,9 +94,53 @@ router.put('/comment',checklogin,(req,res)=>{
         if(err){
             return res.status(422).json({error:err})
         }else{
+            
             res.json(result)
         }
     })
 })
+
+
+router.delete('/deletepost/:postId',checklogin,(req,res)=>{
+    // Club.findOne({ username: req.user.id}, function (err, club) {
+    //     if (err) {
+    //         console.log(err);
+    //         return
+    //     }
+        Post.findOneAndDelete({ _id:req.params.postId})
+        .exec((err,post)=>{
+            if(err){
+                return res.status(422).json({error:err})
+            }
+            else{
+                console.log(result)
+                res.status(201).json(result)
+            }
+        })
+
+    // })
+
+   
+})
+
+
+router.put('/editpost/:postId',checklogin,(req,res)=>{
+    const post ={
+        title:req.body.title,
+        description:req.body.description,
+        imageLink:req.body.imageLink
+    }
+    Post.findOneAndUpdate({ _id:req.params.postId},post,none,function(err,post){
+        
+            if(err){
+                return res.status(422).json({error:err})
+            }
+            else{
+                console.log(post)
+                res.status(201).json(post)
+            }
+        })
+    }
+)
 
 export default router;

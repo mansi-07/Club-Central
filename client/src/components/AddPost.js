@@ -3,7 +3,7 @@ import Navbar from './partials/Navbar.js'
 import AddPostForm from './partials/AddPostForm';
 import Footer from './partials/Footer';
 
-const AddPost = ({ user }) => {
+const AddPost = ({user}) => {
     var token = user.token
     return (
         <div>
@@ -12,7 +12,7 @@ const AddPost = ({ user }) => {
 
             <div>
 
-                <AddPostForm token={token} />
+                <AddPostForm user={user} />
 
             </div>
             <Footer />

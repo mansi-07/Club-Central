@@ -1,7 +1,20 @@
 
 
 .home-card{
-  margin: 26px auto;
-  max-width:500px;
+  margin: 26px auto !important;
+  max-width:800px;
   height: max-content;
+  text-align: left;
+}
+
+.card{
+  text-align: left !important;
+}
+
+.ed-icons
+{
+  float: right;
+  padding: 5px;
+  font-size: 20px;
+
 }
