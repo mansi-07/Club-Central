@@ -22,10 +22,7 @@ const ClubAdminView = () => {
         <>
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page">club admin</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/clubadmin">Home</Link>
+                    <Link className="nav-link active" to="/clubadmin">Home</Link>
                 </li >
                 <li className="nav-item">
                     <Link className="nav-link" to="/clubadmin/addpost">Add Post</Link>
@@ -53,8 +50,8 @@ const UserView = ({ user }) => {
         <>
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page">user</Link>
-                </li>
+                    <Link className="nav-link active" to="/">Home</Link>
+                </li >
                 <li className="nav-item">
                     <Link className="nav-link" to="/events">Events</Link>
                 </li>
