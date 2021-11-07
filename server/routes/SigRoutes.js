@@ -39,15 +39,15 @@ router.post('/addsig', checklogin, (req, res) => {
 })
 
 router.get('/viewsig',checklogin,(req, res) => {
- 
+
     
-    Club.findOne({ username: req.user.id }, function (err, ClubName) {
+    Club.findOne({ username: req.user.id}, function (err, sig) {
         if (err) {
             console.log(err);
             return
         }
-        Sig.find({ ClubName: ClubName._id})
-            .populate("club", "_id name")
+        Sig.find({ sig: sig._id, instituteId: req.user.instituteName})
+            .populate("sigs", "_id name")
             .sort('-createdAt')
             .then((sigs) => {
                 res.json({sigs})
@@ -57,9 +57,8 @@ router.get('/viewsig',checklogin,(req, res) => {
     });
 
 
- 
-})
 
+})
 
 
 

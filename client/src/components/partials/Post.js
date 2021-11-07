@@ -14,16 +14,26 @@ const PostClubView = ({ user }) => {
 
   useEffect(() => {
 
+
+      // axios.get('/api/post/clubpost',{headers: { "Authorization": `Bearer ${t}` }})
+      // .then((res) => {
+      //   //console.log(res.data)
+      //   setData(res.data.posts)
+      // })
+      // .catch(err => {
+      //   console.log(err)
     
-      axios.get('/api/post/clubpost',{headers: { "Authorization": `Bearer ${t}` }})
-      .then((res) => {
-        //console.log(res.data)
-        setData(res.data.posts)
-      })
-      .catch(err => {
-        console.log(err)
-    
-      })
+      // })
+      fetch('/api/post/clubpost', {
+        headers: {
+          "Content-Type":"application/json",
+          "Authorization": "Bearer " + t
+        }
+      }).then(res => res.json())
+        .then(result => {
+          //console.log(result)
+          setData(result.posts)
+        })
 
   })
 
@@ -82,7 +92,7 @@ const PostClubView = ({ user }) => {
               <h5>{item.club.name}
 
                 <i style={{ float: "right", cursor: "pointer" }} class="material-icons ed-icons" onClick={() => deletePost(item._id)}>delete</i>
-                <Modal thePost={item}/>
+                <Modal thePost={item} idpost={item._id}/>
               </h5>
               
               <div style={{ align: "left" }} className="card-image">
@@ -126,7 +136,7 @@ const PostUserView = ({ user }) => {
 
   useEffect(() => {
 
-    axios.get('/api/post/a;;post',{headers: { "Authorization": `Bearer ${t}` }})
+    axios.get('/api/post/allpost',{headers: { "Authorization": `Bearer ${t}` }})
       .then((res) => {
         //console.log(res.data)
         setData(res.data.posts)

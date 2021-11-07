@@ -37,19 +37,20 @@ router.post('/createpost', checklogin, (req, res) => {
 
 })
 
-router.get('/clubpost',checklogin,(req, res) => {
+router.get('/clubpost', checklogin, (req, res) => {
 
     
-    Club.findOne({ username: req.user.id}, function (err, club) {
+    Club.findOne({ username: req.user.id }, function (err, club) {
         if (err) {
             console.log(err);
             return
         }
-        Post.find({ club: club._id, instituteId: req.user.instituteName})
+        Post.find({ club: club._id, instituteId: req.user.instituteName })
             .populate("club", "_id name")
             .populate("comments.commentBy", "_id name")
             .sort('-createdAt')
             .then((posts) => {
+                //console.log({posts})
                 res.json({posts})
             }).catch(err => {
                 console.log(err)
@@ -63,77 +64,81 @@ router.get('/clubpost',checklogin,(req, res) => {
 
 
 
-router.get('/allpost',checklogin,(req, res) => {
-    
-    Post.find({ instituteId: req.user.instituteName})
-            .populate("club", "_id name")
-            .populate("comments.commentBy", "_id name")
-            .sort('-createdAt')
-            .then((posts) => {
-                res.json({posts})
-            }).catch(err => {
-                console.log(err)
-            })
+router.get('/allpost', checklogin, (req, res) => {
+
+    Post.find({ instituteId: req.user.instituteName })
+        .populate("club", "_id name")
+        .populate("comments.commentBy", "_id name")
+        .sort('-createdAt')
+        .then((posts) => {
+            res.json({ posts })
+        }).catch(err => {
+            console.log(err)
+        })
 
 })
 
 
 
-router.put('/comment',checklogin,(req,res)=>{
-    const comment={
-        commentMessage:req.body.commentMessage,
-        commentBy:req.user.id
+router.put('/comment', checklogin, (req, res) => {
+    const comment = {
+        commentMessage: req.body.commentMessage,
+        commentBy: req.user.id
     }
 
-    Post.findByIdAndUpdate(req.body.postId,{
-        $push:{comments:comment}
-    },{
-        new:true
-    }).populate("comments.commentBy","_id name")
-    .exec((err,result)=>{
-        if(err){
-            return res.status(422).json({error:err})
-        }else{
-            
-            res.json(result)
+    Post.findByIdAndUpdate(req.body.postId, {
+        $push: { comments: comment }
+    }, {
+        new: true
+    }).populate("comments.commentBy", "_id name")
+        .exec((err, result) => {
+            if (err) {
+                return res.status(422).json({ error: err })
+            } else {
+
+                res.json(result)
+            }
+        })
+})
+
+
+router.delete('/deletepost/:postId', checklogin, (req, res) => {
+
+    const id = mongoose.Types.ObjectId(req.params.postId);
+    //console.log(id)
+    Post.findOneAndDelete({ _id: id }, function (err, result) {
+        if (err || !result) {
+            return res.status(422).json({ error: err, result: result, postId: id })
+        }
+        else {
+            //console.log(result)
+            res.status(201).json(result)
         }
     })
 })
 
 
-router.delete('/deletepost/:postId',checklogin,(req,res)=>{
-
-    const id = mongoose.Types.ObjectId(req.params.postId);
-    //console.log(id)
-        Post.findOneAndDelete({ _id:id},function(err,result){
-            if(err||!result){
-                return res.status(422).json({error:err,result:result,postId:id})
-            }
-            else{
-                //console.log(result)
-                res.status(201).json(result)
-            }
-        })
-})
-
-
-router.put('/editpost/:postId',checklogin,(req,res)=>{
-    const post ={
-        title:req.body.title,
-        description:req.body.description,
-        imageLink:req.body.imageLink
+router.put('/editpost/:postId', (req, res) => {
+    const post = {
+        title: req.body.title,
+        description: req.body.description,
     }
-    Post.findOneAndUpdate({ _id:req.params.postId},post,none,function(err,post){
-        
-            if(err){
-                return res.status(422).json({error:err})
-            }
-            else{
-                //console.log(post)
-                res.status(201).json(post)
-            }
-        })
+    if(req.body.imageLink !== "")
+    {
+        post.imageLink=req.body.imageLink
     }
+    Post.findOneAndUpdate(
+        { _id: req.params.postId }, post, null, function (err, post) {
+
+        if (err) {
+            return res.status(422).json({ error: err })
+        }
+        else {
+            //console.log(post)
+            res.status(201).json(post)
+        }
+    })
+}
 )
 
 export default router;
