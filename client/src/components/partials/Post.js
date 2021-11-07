@@ -82,10 +82,9 @@ const PostClubView = ({ user }) => {
               <h5>{item.club.name}
 
                 <i style={{ float: "right", cursor: "pointer" }} class="material-icons ed-icons" onClick={() => deletePost(item._id)}>delete</i>
-                <i style={{ float: "right", cursor: "pointer" }} class="material-icons ed-icons">edit</i>
-
+                <Modal thePost={item}/>
               </h5>
-              <Modal />
+              
               <div style={{ align: "left" }} className="card-image">
                 <img src={item.imageLink}></img>
               </div>

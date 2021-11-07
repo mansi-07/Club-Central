@@ -104,13 +104,13 @@ router.put('/comment',checklogin,(req,res)=>{
 router.delete('/deletepost/:postId',checklogin,(req,res)=>{
 
     const id = mongoose.Types.ObjectId(req.params.postId);
-    console.log(id)
+    //console.log(id)
         Post.findOneAndDelete({ _id:id},function(err,result){
             if(err||!result){
                 return res.status(422).json({error:err,result:result,postId:id})
             }
             else{
-                console.log(result)
+                //console.log(result)
                 res.status(201).json(result)
             }
         })
@@ -129,7 +129,7 @@ router.put('/editpost/:postId',checklogin,(req,res)=>{
                 return res.status(422).json({error:err})
             }
             else{
-                console.log(post)
+                //console.log(post)
                 res.status(201).json(post)
             }
         })

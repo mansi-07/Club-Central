@@ -1,8 +1,25 @@
 import React, { Component } from "react";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
+import "../../css/addpostform.css"
 
 class Modal extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: this.props.thePost.title,
+            description: this.props.thePost.description,
+            imageLink: this.props.thePost.imageLink
+        }
+    }
+
+    onTitleChange(event) { this.setState({ title: event.target.value }); }
+    onDescriptionChange(event) { this.setState({ description: event.target.value }); }
+
+
+
+
     componentDidMount() {
         const options = {
             onOpenStart: () => {
@@ -25,21 +42,18 @@ class Modal extends Component {
             endingTop: "10%"
         };
         M.Modal.init(this.Modal, options);
-
-        // let instance = M.Modal.getInstance(this.Modal);
-        // instance.open();
-        // instance.close();
-        // instance.destroy();
     }
 
     render() {
         return (
-            <div>
-                <a
+            <>
+                <i style={{ float: "right", cursor: "pointer" }} data-target="modal1" class="modal-trigger material-icons ed-icons">edit</i>
+
+                {/* <a
                     className="waves-effect waves-light btn modal-trigger"
                     data-target="modal1">
                     Modal
-                </a>
+                </a> */}
 
                 <div style={{ width: "fit-content" }}
                     ref={Modal => {
@@ -54,32 +68,33 @@ class Modal extends Component {
                                 <input
                                     type="text"
                                     placeholder="title"
-
+                                    value={this.state.title}
+                                    onChange={this.onTitleChange.bind(this)}
                                 />
                                 <input
                                     type="text"
-                                    placeholder="description"
-
+                                    value={this.state.description}
+                                    onChange={this.onDescriptionChange.bind(this)}
                                 />
                                 <div >
                                     <span>Upload</span>
                                     <input type="file" />
                                 </div>
-                                
-                                    <a className="modal-close waves-effect waves-red btn-flat">
-                                        Cancel
-                                    </a>
-                                    <a className="modal-close waves-effect waves-green btn-flat">
-                                        Update
-                                    </a>
-                                
+
+                                <a className="modal-close waves-effect waves-red btn-flat">
+                                    Cancel
+                                </a>
+                                <a className="modal-close waves-effect waves-green btn-flat">
+                                    Update
+                                </a>
+
 
                             </form>
                         </div>
                     </div>
 
                 </div>
-            </div>
+            </>
         );
     }
 }
