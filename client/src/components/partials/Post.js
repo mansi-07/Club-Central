@@ -126,7 +126,7 @@ const PostUserView = ({ user }) => {
 
   useEffect(() => {
 
-    axios.get('/api/post/a;;post',{headers: { "Authorization": `Bearer ${t}` }})
+    axios.get('/api/post/allpost',{headers: { "Authorization": `Bearer ${t}` }})
       .then((res) => {
         //console.log(res.data)
         setData(res.data.posts)
