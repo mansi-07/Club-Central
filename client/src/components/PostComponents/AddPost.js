@@ -1,7 +1,7 @@
 import React from 'react'
-import Navbar from './partials/Navbar.js'
-import AddPostForm from './partials/AddPostForm';
-import Footer from './partials/Footer';
+import Navbar from '../partials/Navbar'
+import AddPostForm from './AddPostForm';
+import Footer from '../partials/Footer';
 
 const AddPost = ({user}) => {
     var token = user.token
@@ -19,4 +19,5 @@ const AddPost = ({user}) => {
         </div>
     )
 }
-export default AddPost;
+
+export default AddPost

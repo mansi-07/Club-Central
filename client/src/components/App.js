@@ -4,13 +4,14 @@ import Signin from './AuthComponentes/signin.js'
 import Signup from './AuthComponentes/signup.js'
 import SignOut from './AuthComponentes/signout.js'
 import HomePage from './HomePage'
-import AddPost from './AddPost'
+import AddPost from './PostComponents/AddPost.js'
 import AddSig from './AddSig.js';
 import ViewSig from './ViewSig.js';
 
 import EditProfile from './userComponents/EditProfile.js'
 import AddEvent from './eventsComponentes/AddEvent.js'
 import Event from './eventsComponentes/Event.js'
+import EditProfileClub from './clubComponents/EditProfileClub.js'
 
 export default function App() {
     const [user, setSignInUser] = useState({})
@@ -62,6 +63,9 @@ export default function App() {
                 </Route>
                 <Route exact path="/events">
                     <Event user={user} />
+                </Route>
+                <Route exact path="/edit">
+                    <EditProfileClub user={user} />
                 </Route>
             </Switch>
         </Router>

@@ -90,12 +90,12 @@ router.put('/comment', checklogin, (req, res) => {
         $push: { comments: comment }
     }, {
         new: true
-    }).populate("comments.commentBy", "_id name")
+    }).populate("comments.commentBy", "username _id")
         .exec((err, result) => {
             if (err) {
                 return res.status(422).json({ error: err })
             } else {
-
+                console.log("sucess")
                 res.json(result)
             }
         })
