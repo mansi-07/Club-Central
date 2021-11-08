@@ -4,7 +4,7 @@ import Signin from './AuthComponentes/signin.js'
 import Signup from './AuthComponentes/signup.js'
 import SignOut from './AuthComponentes/signout.js'
 import HomePage from './HomePage'
-import AddPost from './AddPost'
+import AddPost from './PostComponents/AddPost.js'
 import AddSig from './AddSig.js';
 import ViewSig from './ViewSig.js';
 

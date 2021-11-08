@@ -2,9 +2,9 @@
 import React from 'react';
 
 import '../css/posts.css';
-import Navbar from './partials/Navbar';
-import Post from './partials/Post';
-import Footer from './partials/Footer';
+import Navbar from '../partials/Navbar';
+import Post from './PostComponents/Post';
+import Footer from '../partials/Footer';
 
 
 const Posts = ({ user }) => {

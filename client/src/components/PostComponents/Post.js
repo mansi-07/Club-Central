@@ -15,53 +15,63 @@ const PostClubView = ({ user }) => {
   useEffect(() => {
 
 
-      // axios.get('/api/post/clubpost',{headers: { "Authorization": `Bearer ${t}` }})
-      // .then((res) => {
-      //   //console.log(res.data)
-      //   setData(res.data.posts)
-      // })
-      // .catch(err => {
-      //   console.log(err)
-    
-      // })
-      fetch('/api/post/clubpost', {
-        headers: {
-          "Content-Type":"application/json",
-          "Authorization": "Bearer " + t
-        }
-      }).then(res => res.json())
-        .then(result => {
-          //console.log(result)
-          setData(result.posts)
-        })
+    // axios.get('/api/post/clubpost',{headers: { "Authorization": `Bearer ${t}` }})
+    // .then((res) => {
+    //   //console.log(res.data)
+    //   setData(res.data.posts)
+    // })
+    // .catch(err => {
+    //   console.log(err)
 
-  })
-
-  
-
-  const makeComment = (commentMessage, postId) => {
-    fetch('/api/post/comment', {
-      method: "put",
+    // })
+    fetch('/api/post/clubpost', {
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + t
-      },
-      body: JSON.stringify({
-        postId,
-        commentMessage
-      })
+      }
     }).then(res => res.json())
       .then(result => {
-        console.log(result)
-        const newData = data.map(item => {
-          if (item._id == result._id) {
-            return result
-          } else {
-            return item
-          }
-        })
-        setData(newData)
-      }).catch(err => {
+        //console.log(result.posts)
+        setData(result.posts)
+      })
+
+  })
+
+
+
+  const makeComment = (commentMessage, postId) => {
+    // fetch('/api/post/comment', {
+    //   method: "put",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Authorization": "Bearer " + t
+    //   },
+    //   body: JSON.stringify({
+    //     postId,
+    //     commentMessage
+    //   })
+    // }).then(res => res.json())
+    //   .then(result => {
+    //     console.log(result)
+    //     const newData = data.map(item => {
+    //       if (item._id == result._id) {
+    //         return result
+    //       } else {
+    //         return item
+    //       }
+    //     })
+    //     setData(newData)
+    //     //console.log(data)
+    //   }).catch(err => {
+    //     console.log(err)
+    //   })
+
+    axios.put(`/api/post/comment`, { headers: { "Authorization": `Bearer ${t}`, "Content-Type": "application/json" } })
+      .then((res) => {
+        console.log(res)
+        history.push("/clubadmin")
+      })
+      .catch(err => {
         console.log(err)
       })
   }
@@ -92,18 +102,19 @@ const PostClubView = ({ user }) => {
               <h5>{item.club.name}
 
                 <i style={{ float: "right", cursor: "pointer" }} class="material-icons ed-icons" onClick={() => deletePost(item._id)}>delete</i>
-                <Modal thePost={item} idpost={item._id}/>
+                <Modal thePost={item} idpost={item._id} />
               </h5>
-              
+
               <div style={{ align: "left" }} className="card-image">
                 <img src={item.imageLink}></img>
               </div>
               <div className="card-content">
                 <h6>{item.title}</h6>
+                
                 <p>{item.description}</p>
                 {
                   item.comments.map(record => {
-                    <h6><span style={{ fontWeight: "400" }}>{record.commentBy.name}</span>{record.commentMessage}</h6>
+                    <h6><span style={{ fontWeight: "400" }}>{record.commentBy.username}</span>{record.commentMessage}</h6>
                   })
                 }
                 <form onSubmit={(e) => {
@@ -136,7 +147,7 @@ const PostUserView = ({ user }) => {
 
   useEffect(() => {
 
-    axios.get('/api/post/allpost',{headers: { "Authorization": `Bearer ${t}` }})
+    axios.get('/api/post/allpost', { headers: { "Authorization": `Bearer ${t}` } })
       .then((res) => {
         //console.log(res.data)
         setData(res.data.posts)

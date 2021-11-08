@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './partials/Navbar.js'
-import Post from './partials/Post';
+import Post from './PostComponents/Post';
 import Footer from './partials/Footer';
 
 const HomePage = ({ user }) => {
