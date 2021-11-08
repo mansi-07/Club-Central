@@ -24,8 +24,8 @@ router.post('/addsig', checklogin, (req, res) => {
         const sig = new Sig({
             ClubName,
             SigName,
-            SigDesc
-            // instituteId: req.user.instituteName
+            SigDesc,
+            instituteId: req.user.instituteName
         })
         sig.save().then(result => {
             res.json({ sig: result })

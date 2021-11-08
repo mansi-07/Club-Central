@@ -38,6 +38,9 @@ const ClubAdminView = () => {
                     <Link className="nav-link" to="/addevent">Add Event</Link>
                 </li>
                 <li className="nav-item">
+                    <Link className="nav-link" to="/edit">Edit Profile</Link>
+                </li>
+                <li className="nav-item">
                     <Link className="nav-link" to="/signout">Sign Out</Link>
                 </li>
             </ul >

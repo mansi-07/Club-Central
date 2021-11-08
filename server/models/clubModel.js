@@ -10,9 +10,8 @@ const ClubSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    isTechnical:{
+    isExclusive:{
         type:Boolean,
-        required:true,
         default: false
     },
     isRecruiting:{

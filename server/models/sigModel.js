@@ -14,7 +14,16 @@ const sigSchema = mongoose.Schema({
     SigDesc : {
         type: String,
         required: true
-    }
+    },
+    isRecruiting:{
+        type:Boolean,
+        default: false
+    },
+    instituteId :{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Club'
+    },
     //round:[RoundSchema],
     // testLink: 
 },{
