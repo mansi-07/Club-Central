@@ -14,7 +14,11 @@ const sigSchema = mongoose.Schema({
     SigDesc : {
         type: String,
         required: true
-    }
+    },
+    isRecruiting:{
+        type:Boolean,
+        default: false
+    },
     //round:[RoundSchema],
     // testLink: 
 },{
