@@ -8,10 +8,13 @@ import AddPost from './PostComponents/AddPost.js'
 import AddSig from './AddSig.js';
 import ViewSig from './ViewSig.js';
 import Results from './ResultComponents/Results.js'
+import Register from './recsComponents/Register.js'
+
 import EditProfile from './userComponents/EditProfile.js'
 import AddEvent from './eventsComponentes/AddEvent.js'
 import Event from './eventsComponentes/Event.js'
 import EditProfileClub from './clubComponents/EditProfileClub.js'
+import UserList from './superadminComponents/UserList.js'
 
 export default function App() {
     const [user, setSignInUser] = useState({})
@@ -71,6 +74,12 @@ export default function App() {
                 </Route>
                 <Route exact path="/edit">
                     <EditProfileClub user={user} />
+                </Route>
+                <Route exact path="/register">
+                    <Register user={user} />
+                </Route>
+                <Route exact path="/userlist">
+                    <UserList user={user} />
                 </Route>
             </Switch>
         </Router>

@@ -62,6 +62,7 @@ function AddEvent({user}) {
     <><div>
       <Navbar user={user} />
     </div><div className="App">
+        <div className="container">
         <h1>Calendar</h1>
         <h2>Add New Event</h2>
         <div>
@@ -71,6 +72,7 @@ function AddEvent({user}) {
           <button stlye={{ marginTop: "10px" }} onClick={handleAddEvent}>
             Add Event
           </button>
+        </div>
         </div>
         <Calendar
           localizer={localizer}
