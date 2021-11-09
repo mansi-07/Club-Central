@@ -15,6 +15,7 @@ import AddEvent from './eventsComponentes/AddEvent.js'
 import Event from './eventsComponentes/Event.js'
 import EditProfileClub from './clubComponents/EditProfileClub.js'
 import UserList from './superadminComponents/UserList.js'
+import Status from './recsComponents/Status.js'
 
 export default function App() {
     const [user, setSignInUser] = useState({})
@@ -80,6 +81,9 @@ export default function App() {
                 </Route>
                 <Route exact path="/userlist">
                     <UserList user={user} />
+                </Route>
+                <Route exact path="/status">
+                    <Status user={user} />
                 </Route>
             </Switch>
         </Router>

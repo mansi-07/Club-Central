@@ -65,7 +65,10 @@ const UserView = ({ user }) => {
                     <Link className="nav-link" to="/events">Events</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/register">Open recs</Link>
+                    <Link className="nav-link" to="/register">Apply</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/status">Application Status</Link>
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link" to={`/editprofile/${user.user_id}`}>Edit Profile</Link>

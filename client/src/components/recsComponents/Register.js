@@ -19,8 +19,10 @@ const Register = ({user}) => {
             });
     }, []);
     const [sigID, setSigID] = useState();
+    const [clubID, setclubID] = useState();
+    const [signame, setsigname] = useState();
     const handleSubmit = () => {
-        axios.post(`/api/recs/apply`, {userID: user.user_id, sigID: sigID})
+        axios.post(`/api/recs/apply`, {userID: user.user_id, sigID: sigID, clubID: clubID, signame: signame})
             .then(response => {
                 console.log(response.data.msg)
                 alert(response.data.msg)
@@ -44,7 +46,7 @@ const Register = ({user}) => {
                             <p>{l.SigDesc}</p>
                             </div>
                             <div class="card-action">
-                                <button class="btn waves-effect waves-light light-blue accent-3" type="submit" onClick={() => {setSigID(l._id); handleSubmit();}}>Register
+                                <button class="btn waves-effect waves-light light-blue accent-3" type="submit" onClick={() => {setSigID(l._id);setclubID(l.ClubName); setsigname(l.SigName); handleSubmit();}}>Register
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>

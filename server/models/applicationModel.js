@@ -11,6 +11,12 @@ const ApplicationSchema = mongoose.Schema({
         required: true,
         ref: 'Sig'
     },
+    clubName : {
+        type: String
+    },
+    sigName : {
+        type: String
+    },
     status :{
         roundID : {
             type: mongoose.Schema.Types.ObjectId,
