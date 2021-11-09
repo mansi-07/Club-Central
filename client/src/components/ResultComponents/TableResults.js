@@ -73,7 +73,7 @@ const TableResults = ({ user }) => {
                             </p>
                         </div>
                         <div class="card-action">
-                        <button style={{float:"right"}} class="waves-effect waves-light btn" onClick={(e) => getUsers(e)}>Done</button>
+                            <button style={{ float: "right" }} class="waves-effect waves-light btn" onClick={(e) => getUsers(e)}>Done</button>
                         </div>
                     </div>
                 </div>
@@ -81,31 +81,31 @@ const TableResults = ({ user }) => {
 
 
 
-            
+
             <div class="row">
                 <div class="col s12 m10">
-                    <div class="card darken-1">
-                        <div class="card-content">
-                            <span class="card-title">Check the users who are selected: </span>
-                            <p>
-                                {
-                                    userslist.map(item => {
-                                        return (
-                                            <p>
-                                                <label >
-                                                    <input type="checkbox" id="isRecruiting" checked={item.status.status == 2 ? "checked" : null} />
-                                                    <span>{item.username.username}</span>
-                                                </label>
-                                            </p>
-                
-                                        )
-                                    })
-                                }
-                            </p>
-                        </div>
-                        <div class="card-action">
-                        <button style={{float:"right"}} class="waves-effect waves-light btn" onClick={(e) => getUsers(e)}>Update</button>
-                        </div>
+                    <div class="card darken-1">             
+                            <div class="card-content">
+                                <span class="card-title">Check the users who are selected: </span>
+                                <p>
+                                    {
+                                        userslist.map(item => {
+                                            return (
+                                                <p>
+                                                    <label >
+                                                        <input type="checkbox" id="isRecruiting" checked={item.status.status == 2 ? "checked" : null}  />
+                                                        <span>{item.username.username}</span>
+                                                    </label>
+                                                </p>
+
+                                            )
+                                        })
+                                    }
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <button style={{ float: "right" }} class="waves-effect waves-light btn" onClick={(e) => getUsers(e)}>Update</button>
+                            </div>
                     </div>
                 </div>
             </div>

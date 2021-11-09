@@ -47,7 +47,7 @@ router.get('/clubpost', checklogin, (req, res) => {
         }
         Post.find({ club: club._id, instituteId: req.user.instituteName })
             .populate("club", "_id name")
-            .populate("comments.commentBy", "_id name")
+            .populate("comments.commentBy", "_id username")
             .sort('-createdAt')
             .then((posts) => {
                 //console.log({posts})

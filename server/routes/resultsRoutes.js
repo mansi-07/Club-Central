@@ -13,12 +13,8 @@ import User from '../models/globalUserModel.js'
 
 router.get('/users/:sigId', (req, res) => {
     const today = Date.now()
-    Round.find({
-        $and: [
-            { sigId: req.params.sigId },
-            { dateTime: { $lt: today } }
-        ]
-    })
+    const id = mongoose.Types.ObjectId(req.params.sigId);
+    Round.find( { sigId: id , dateTime: { $lt: today } })
         .sort('-roundNum')
         .limit(1)
         .exec(function (err, round) {

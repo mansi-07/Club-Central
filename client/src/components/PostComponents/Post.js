@@ -40,40 +40,40 @@ const PostClubView = ({ user }) => {
 
 
   const makeComment = (commentMessage, postId) => {
-    // fetch('/api/post/comment', {
-    //   method: "put",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Authorization": "Bearer " + t
-    //   },
-    //   body: JSON.stringify({
-    //     postId,
-    //     commentMessage
-    //   })
-    // }).then(res => res.json())
-    //   .then(result => {
-    //     console.log(result)
-    //     const newData = data.map(item => {
-    //       if (item._id == result._id) {
-    //         return result
-    //       } else {
-    //         return item
-    //       }
-    //     })
-    //     setData(newData)
-    //     //console.log(data)
-    //   }).catch(err => {
-    //     console.log(err)
-    //   })
-
-    axios.put(`/api/post/comment`, { headers: { "Authorization": `Bearer ${t}`, "Content-Type": "application/json" } })
-      .then((res) => {
-        console.log(res)
-        history.push("/clubadmin")
+    fetch('/api/post/comment', {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + t
+      },
+      body: JSON.stringify({
+        postId,
+        commentMessage
       })
-      .catch(err => {
+    }).then(res => res.json())
+      .then(result => {
+        //console.log(result)
+        const newData = data.map(item => {
+          if (item._id == result._id) {
+            return result
+          } else {
+            return item
+          }
+        })
+        setData(newData)
+        //console.log(data)
+      }).catch(err => {
         console.log(err)
       })
+
+    // axios.put(`/api/post/comment`, { headers: { "Authorization": `Bearer ${t}`, "Content-Type": "application/json" } })
+    //   .then((res) => {
+    //     console.log(res)
+    //     history.push("/clubadmin")
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
   }
 
   const deletePost = (postId) => {
@@ -109,12 +109,15 @@ const PostClubView = ({ user }) => {
                 <img src={item.imageLink}></img>
               </div>
               <div className="card-content">
-                <h6>{item.title}</h6>
+                <h4>{item.title}</h4>
                 
-                <p>{item.description}</p>
+                <h6>{item.description}</h6>
+                <div>Comments:</div>
                 {
                   item.comments.map(record => {
-                    <h6><span style={{ fontWeight: "400" }}>{record.commentBy.username}</span>{record.commentMessage}</h6>
+                    return(
+                    <div><span style={{fontWeight:"500"}}>{record.commentBy.username}</span>     {record.commentMessage}</div>
+                    )
                   })
                 }
                 <form onSubmit={(e) => {
@@ -159,7 +162,7 @@ const PostUserView = ({ user }) => {
   })
 
   const makeComment = (commentMessage, postId) => {
-    fetch('/comment', {
+    fetch('/api/post/comment', {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -171,7 +174,7 @@ const PostUserView = ({ user }) => {
       })
     }).then(res => res.json())
       .then(result => {
-        console.log(result)
+        //console.log(result)
         const newData = data.map(item => {
           if (item._id == result._id) {
             return result
@@ -184,10 +187,6 @@ const PostUserView = ({ user }) => {
         console.log(err)
       })
   }
-
-
-
-
 
   return (
     <div className="home">
@@ -206,9 +205,12 @@ const PostUserView = ({ user }) => {
               <div className="card-content">
                 <h6>{item.title}</h6>
                 <p>{item.description}</p>
+                <div>Comments:</div>
                 {
                   item.comments.map(record => {
-                    <h6><span style={{ fontWeight: "400" }}>{record.commentBy.name}</span>{record.commentMessage}</h6>
+                    return(
+                    <div><span style={{fontWeight:"400"}}>{record.commentBy.username}</span>{record.commentMessage}</div>
+                    )
                   })
                 }
                 <form onSubmit={(e) => {
