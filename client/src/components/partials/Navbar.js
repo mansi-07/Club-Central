@@ -71,6 +71,9 @@ const UserView = ({ user }) => {
                     <Link className="nav-link" to="/status">Application Status</Link>
                 </li>
                 <li className="nav-item">
+                    <Link className="nav-link" to="/">Preference</Link>
+                </li>
+                <li className="nav-item">
                     <Link className="nav-link" to={`/editprofile/${user.user_id}`}>Edit Profile</Link>
                 </li>
                 <li className="nav-item">

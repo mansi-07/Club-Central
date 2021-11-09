@@ -3,19 +3,23 @@ const rounds = 12
 
 const globalUsers = [
     {
-        username: 'supperDummy',
-        email: 'supperDummy@gmail.com',
-        password: bcrypt.hashSync('supperDummy'),
-        isSuperAdmin: true
+        username: 'Jignesh',
+        email: 'jignesh@gmail.com',
+        password: bcrypt.hashSync('Jignesh'),
     },
     {
-        username: 'clubDummy',
-        email: 'clubDummy@gmail.com',
-        password: bcrypt.hashSync('clubDummy'),
+        username: 'Seetha',
+        email: 'seetha@gmail.com',
+        password: bcrypt.hashSync('Seetha'),
+    },
+    {
+        username: 'IEEEAdmin',
+        email: 'ieeenitk@gmail.com',
+        password: bcrypt.hashSync('IEEEAdmin'),
         isAdmin: true
     },
     {
-        username: 'userDummy',
+        username: 'NIT',
         email: 'userDummy@gmail.com',
         password: bcrypt.hashSync('userDummy'),
     }

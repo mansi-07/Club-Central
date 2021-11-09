@@ -43,6 +43,7 @@ router.get('/users/:sigId', (req, res) => {
 
 router.get('/sigs', (req, res) => {
 
+    
     Sig.find()
         .then((sigs) => {
             //console.log({posts})

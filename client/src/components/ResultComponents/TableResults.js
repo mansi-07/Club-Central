@@ -8,7 +8,7 @@ import { useHistory, useParams } from 'react-router-dom'
 
 const TableResults = ({ user }) => {
 
-    //const t = user['token']
+    const t = user['token']
 
     const [sigslist, setSigsList] = useState([])
     const [userslist, setUsersList] = useState([])
@@ -19,16 +19,17 @@ const TableResults = ({ user }) => {
 
     useEffect(() => {
 
-        axios.get('/api/result/sigs')
-            .then((res) => {
-                //console.log(res.data.sigs)
-                setSigsList(res.data.sigs)
-                //console.log(sigslist)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-
+    
+        axios.get('/viewsig',{headers: { "Authorization": `Bearer ${t}` }})
+        .then((res) => {
+          //console.log(res.data.sigs)
+          setSigsList(res.data.sigs)
+        })
+        .catch(err => {
+          console.log(err)
+      
+        })
+  
     })
 
 

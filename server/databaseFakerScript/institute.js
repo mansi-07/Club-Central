@@ -1,10 +1,13 @@
 const institutes = [
     {
-        name: "NITK"
+        name: "NIT Karnataka"
     },
     {
-        name: "NITT"
+        name: "NIT Trichy"
     },
+    {
+        name: "NIT Warangal"
+    }
 ]
 
 export default institutes
