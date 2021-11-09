@@ -10,6 +10,9 @@ const SuperAdminView = () => {
                     <Link className="nav-link active" aria-current="page" to="/superadmin">super admin</Link>
                 </li>
                 <li className="nav-item">
+                    <Link className="nav-link" to="/userlist">User List</Link>
+                </li>
+                <li className="nav-item">
                     <Link className="nav-link" to="/signout">Sign Out</Link>
                 </li>
             </ul>

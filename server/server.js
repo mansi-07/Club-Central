@@ -7,7 +7,7 @@ import sigRoutes from './routes/SigRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import clubRoutes from './routes/clubRoutes.js'
 import recsRoutes from './routes/recsRoutes.js'
-
+import superadminRoutes from './routes/superadminRoutes.js'
 dotenv.config()
 
 await connectDatabase()
@@ -25,6 +25,7 @@ app.use('/',sigRoutes)
 app.use('/api/recs', recsRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/club', clubRoutes)
+app.use('/api/superadmin', superadminRoutes)
 
 
 const PORT = process.env.PORT || 5000
