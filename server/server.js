@@ -6,6 +6,7 @@ import postRoutes from './routes/postRoutes.js'
 import sigRoutes from './routes/SigRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import clubRoutes from './routes/clubRoutes.js'
+import recsRoutes from './routes/recsRoutes.js'
 
 dotenv.config()
 
@@ -21,9 +22,10 @@ app.use(express.urlencoded({limit: '25mb'}));
 app.use('/api/auth', authRoutes)
 app.use('/api/post',postRoutes)
 app.use('/',sigRoutes)
-
+app.use('/api/recs', recsRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/club', clubRoutes)
+
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, console.log(

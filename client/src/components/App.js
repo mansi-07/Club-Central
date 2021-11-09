@@ -7,6 +7,7 @@ import HomePage from './HomePage'
 import AddPost from './PostComponents/AddPost.js'
 import AddSig from './AddSig.js';
 import ViewSig from './ViewSig.js';
+import Register from './recsComponents/Register.js'
 
 import EditProfile from './userComponents/EditProfile.js'
 import AddEvent from './eventsComponentes/AddEvent.js'
@@ -66,6 +67,9 @@ export default function App() {
                 </Route>
                 <Route exact path="/edit">
                     <EditProfileClub user={user} />
+                </Route>
+                <Route exact path="/register">
+                    <Register user={user} />
                 </Route>
             </Switch>
         </Router>
