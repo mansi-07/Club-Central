@@ -26,6 +26,7 @@ router.post('/addsig', checklogin, (req, res) => {
             SigName,
             SigDesc,
             instituteId: req.user.instituteName
+            // instituteId: req.user.instituteName
         })
         sig.save().then(result => {
             res.json({ sig: result })
@@ -39,15 +40,13 @@ router.post('/addsig', checklogin, (req, res) => {
 })
 
 router.get('/viewsig',checklogin,(req, res) => {
-
-    
-    Club.findOne({ username: req.user.id}, function (err, sig) {
+    Club.findOne({ username: req.user.id}, function (err, ClubName  ) {
         if (err) {
             console.log(err);
             return
         }
-        Sig.find({ sig: sig._id, instituteId: req.user.instituteName})
-            .populate("sigs", "_id name")
+        Sig.find({ ClubName: ClubName._id, instituteId: req.user.instituteName})
+            .populate("ClubName", "_id name")
             .sort('-createdAt')
             .then((sigs) => {
                 res.json({sigs})
@@ -60,51 +59,38 @@ router.get('/viewsig',checklogin,(req, res) => {
 
 })
 
+router.delete('/deletesig/:sigId',checklogin,(req,res)=>{
+
+    const id = mongoose.Types.ObjectId(req.params.sigId);
+    //console.log(id)
+        Sig.findOneAndDelete({ _id:id},function(err,result){
+            if(err||!result){
+                return res.status(422).json({error:err,result:result,sigId:id})
+            }
+            else{
+                //console.log(result)
+                res.status(201).json(result)
+            }
+        })
+})
 
 
-// router.get('/allpost',checklogin,(req, res) => {
+router.put('/editsig/:sigId',checklogin,(req,res)=>{
+    const sig ={
+        SigName:req.body.SigName,
+        SigDesc:req.body.SigDesc,
+    }
+    Sig.findOneAndUpdate({ _id:req.params.sigId},sig,none,function(err,sig){
+        
+            if(err){
+                return res.status(422).json({error:err})
+            }
+            else{
+                res.status(201).json(sig)
+            }
+        })
+    }
+)
 
-    
-//     Club.findOne({ username: req.user.id }, function (err, club) {
-//         if (err) {
-//             console.log(err);
-//             return
-//         }
-//         Post.find({ club: club._id})
-//             .populate("club", "_id name")
-//             .populate("comments.commentBy", "_id name")
-//             .sort('-createdAt')
-//             .then((posts) => {
-//                 res.json({posts})
-//             }).catch(err => {
-//                 console.log(err)
-//             })
-//     });
-
-
-
-// })
-
-
-
-// router.put('/comment',checklogin,(req,res)=>{
-//     const comment={
-//         commentMessage:req.body.commentMessage,
-//         commentBy:req.user._id
-//     }
-
-//     Post.findByIdAndUpdate(req.body.postId,{
-//         $push:{comments:comment}
-//     },{
-//         new:true
-//     }).populate("comments.commentBy","_id name")
-//     .exec((err,result)=>{
-//         if(err){
-//             return res.status(422).json({error:err})
-//         }else{
-//             res.json(result)
-//         }
-//     })
-// })
 
 export default router;

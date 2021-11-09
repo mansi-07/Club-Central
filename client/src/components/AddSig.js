@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './partials/Navbar.js'
 import AddSigForm from './partials/AddSigForm.js';
-//import Footer from './partials/Footer';
+import Footer from './partials/Footer';
 
 const AddSig = ({ user }) => {
     var token = user.token
@@ -17,7 +17,7 @@ const AddSig = ({ user }) => {
                 
 
             </div>
-            {/* <Footer /> */}
+            <Footer />
         </div>
     )
 }

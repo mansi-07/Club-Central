@@ -1,77 +1,75 @@
-// src/components/Post/index.js
-import logo from "../../assets/images/logo.png"
 import "../../css/post.css";
+//import { useHistory } from 'react-router-dom'
 import React, { useState, useEffect, useReducer } from "react";
+//import { Link } from "react-router-dom";
+import axios from "axios";
+import EditSigModal from "./EditSigModal";
 
-const ViewSig = ({user}) => {
-  const t=user['token']
+
+const ViewSig = ({ user }) => {
+  const t = user['token']
   const [data, setData] = useState([])
+  //const history = useHistory()
+
+
   useEffect(() => {
-    fetch('/viewsig', {
-      headers: {
-        "Content-Type":"application/json",
-        "Authorization": "Bearer " + t
-      }
-    }).then(res => res.json())
-      .then(result => {
-        console.log(result)
-        setData(result.sigs)
+
+    
+      axios.get('/viewsig',{headers: { "Authorization": `Bearer ${t}` }})
+      .then((res) => {
+        //console.log(res.data.sigs)
+        setData(res.data.sigs)
       })
+      .catch(err => {
+        console.log(err)
+    
+      })
+
   })
 
-  // const makeComment = (commentMessage,postId)=>{
-  //   fetch('/comment',{
-  //     method:"put",
-  //     headers:{
-  //         "Content-Type":"application/json",
-  //         //"Authorization":"Bearer "+localStorage.getItem("jwt")
-  //     },
-  //     body:JSON.stringify({
-  //         postId,
-  //         commentMessage
-  //     })
-  // }).then(res=>res.json())
-  // .then(result=>{
-  //     console.log(result)
-  //     const newData = data.map(item=>{
-  //       if(item._id==result._id){
-  //           return result
-  //       }else{
-  //           return item
-  //       }
-  //    })
-  //   setData(newData)
-  // }).catch(err=>{
-  //     console.log(err)
-  // })
-  // }
+
+  const deleteSig = (sigId) => {
+    
+    axios.delete(`/deletesig/${sigId}`, { headers: { "Authorization": `Bearer ${t}` } })
+      .then((res) => {
+        console.log(res)
+        alert("Deleted successfully!")
+        //history.push("/clubadmin")
+      })
+      .catch(err => {
+        console.log(err)
+        alert(err.response.data.msg)
+      })
+
+  }
+
+  
+
   return (
     <div className="home">
       {
         data.map(item => {
           return (
             <div className="card home-card">
-              <h5>{item.club.name}</h5>
-              {/* <div className="card-image">
-                <img src={item.imageLink}></img>
-              </div> */}
+
+              <h5>{item.SigName}
+                <i style={{ float: "right", cursor: "pointer" }} class="material-icons ed-icons" onClick={() => deleteSig(item._id)}>delete</i>
+                <EditSigModal theSig={item}/>
+              </h5>
+            
               <div className="card-content">
-                <h6>{item.SigName}</h6>
                 <p>{item.SigDesc}</p>
-                <form onSubmit={(e)=>{
-                  e.preventDefault()
-                  console.log(e.target)
-                }}>
-                {/* <input type="text" placeholder="add comment" /> */}
-                </form>
               </div>
+              <a class="waves-effect waves-light btn" onclick="window.location.href='/roundModal.js'">Add Round</a>
+              
+          
             </div>
 
           )
         })
       }
     </div>
-
+  
   )
 
 

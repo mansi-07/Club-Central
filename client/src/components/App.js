@@ -7,7 +7,7 @@ import HomePage from './HomePage'
 import AddPost from './PostComponents/AddPost.js'
 import AddSig from './AddSig.js';
 import ViewSig from './ViewSig.js';
-
+import Results from './ResultComponents/Results.js'
 import EditProfile from './userComponents/EditProfile.js'
 import AddEvent from './eventsComponentes/AddEvent.js'
 import Event from './eventsComponentes/Event.js'
@@ -52,7 +52,12 @@ export default function App() {
                 </Route>
                 <Route exact path="/clubadmin/addpost">
                     {
-                        <AddPost user={user} />
+                        user.isAdmin && <AddPost user={user} />
+                    }
+                </Route>
+                <Route exact path="/results">
+                    {
+                        <Results user={user}/>
                     }
                 </Route>
                 <Route exact path="/editprofile/:id">

@@ -6,6 +6,7 @@ import postRoutes from './routes/postRoutes.js'
 import sigRoutes from './routes/SigRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import clubRoutes from './routes/clubRoutes.js'
+import resultRoutes from './routes/resultsRoutes.js'
 
 dotenv.config()
 
@@ -20,6 +21,7 @@ app.use(express.urlencoded({limit: '25mb'}));
 
 app.use('/api/auth', authRoutes)
 app.use('/api/post',postRoutes)
+app.use('/api/result',resultRoutes)
 app.use('/',sigRoutes)
 
 app.use('/api/user', userRoutes)
