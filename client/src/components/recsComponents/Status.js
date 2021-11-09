@@ -8,13 +8,15 @@ const Status = ({user}) => {
         return {
             ClubName: u.clubName,
             status: u.status.status,
-            
+            sigName : u.sigName
         };
     }
     
     console.log(userList)
+
     useEffect(() => {
-        axios.post(`/api/recs/status`,  { id: user.user_id })
+        console.log(user.user_id)
+        axios.post(`/api/recs/getstatus`,  { id: user.user_id })
             .then(response => {
                 const events = response.data.map(users) 
                 setUserList(...userList, events)
@@ -28,6 +30,7 @@ const Status = ({user}) => {
                 <thead>
                 <tr>
                     <th>Club</th>
+                    <th>Sig</th>
                     <th>Status</th>
                 </tr>
                 </thead>
@@ -36,10 +39,11 @@ const Status = ({user}) => {
                         userList && userList.map( u=> {
                         return (
                             <tr>
-                                <td>{u.name}</td>
-                                {u.status.status===0 ? <td>Rejected!</td>
-                                    : u.status.status===1 ? <td>Ongoing!</td>
-                                    : <td>Selected!</td>
+                                <td>{u.ClubName}</td>
+                                <td>{u.sigName}</td>
+                                {u.status===0 ? <td style={{color: "red"}}>Rejected!</td>
+                                    : u.status===1 ? <td style={{color: "blue"}}>Ongoing!</td>
+                                    : <td style={{color: "green"}}>Selected!</td>
                                 }
                             </tr>
                         )})

@@ -46,8 +46,9 @@ export const apply = asyncHandler(async(req,res) => {
 })
 
 export const getStatus = asyncHandler(async(req,res) => {
-    const username  = req.body.username;  
-    const list = await Application.find({ username: username})
+    const id  = req.body.id;  
+    const list = await Application.find({ username: id})
+    console.log(list)
     if(!list)
         res.status(404)
     res.status(201).json(list)
