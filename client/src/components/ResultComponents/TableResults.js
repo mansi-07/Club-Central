@@ -14,6 +14,8 @@ const TableResults = ({ user }) => {
     const [userslist, setUsersList] = useState([])
     const [sigid, setSigID] = useState("")
     const { id } = useParams()
+    const [checked,setChecked]=useState([])
+    const [unchecked,setUnchecked]=useState([])
 
     useEffect(() => {
 
@@ -46,6 +48,14 @@ const TableResults = ({ user }) => {
             .catch(err => {
                 console.log(err)
             })
+    }
+
+    const handleCheck =(e,id)=>{
+        if(e.target.checked)
+        {
+            setChecked(...checked,[id])
+        }
+        console.log(checked)
     }
 
     return (
@@ -93,7 +103,7 @@ const TableResults = ({ user }) => {
                                             return (
                                                 <p>
                                                     <label >
-                                                        <input type="checkbox" id="isRecruiting" checked={item.status.status == 2 ? "checked" : null}  />
+                                                        <input type="checkbox" id="isRecruiting" onClick={(e)=>handleCheck(e,item._id)}/>
                                                         <span>{item.username.username}</span>
                                                     </label>
                                                 </p>
