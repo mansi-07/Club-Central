@@ -6,8 +6,9 @@ const Status = ({user}) => {
     const [userList, setUserList] = useState([])
     const users = (u) => {
         return {
-            name: u.name,
-            isAdmin: u.isAdmin
+            ClubName: u.clubName,
+            status: u.status.status,
+            
         };
     }
     

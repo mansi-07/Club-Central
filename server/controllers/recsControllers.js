@@ -13,7 +13,7 @@ export const getSig = asyncHandler(async(req,res) => {
 })
 
 export const apply = asyncHandler(async(req,res) => {
-    const {userID, sigID, clubID}  = req.body;
+    const {userID, sigID, clubID, signame}  = req.body;
     console.log({userID, sigID})
     const exists = await Application.findOne({ username: userID, sigID: sigID})
     console.log(exists)
@@ -31,6 +31,7 @@ export const apply = asyncHandler(async(req,res) => {
         username: userID,
         sigID: sigID,
         clubName: club.name,
+        sigName: signame,
         status: {
             roundID: rounds._id,
             status: 1
@@ -42,4 +43,12 @@ export const apply = asyncHandler(async(req,res) => {
         res.status(400).send({msg: "Error"})
         throw new Error('Something is wrong. Please enter valid data.')
     }
+})
+
+export const getStatus = asyncHandler(async(req,res) => {
+    const username  = req.body.username;  
+    const list = await Application.find({ username: username})
+    if(!list)
+        res.status(404)
+    res.status(201).json(list)
 })

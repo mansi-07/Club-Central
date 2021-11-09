@@ -7,4 +7,6 @@ router.route('/getsigs').post(getSig)
 
 router.route('/apply').post(apply)
 
+router.route('/getapplication').post()
+
 export default router
