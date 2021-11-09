@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler'
 import Sig from '../models/sigModel.js'
 import Application from '../models/applicationModel.js';
 import Round from '../models/helper_models/roundSchema.js';
+import Club from '../models/clubModel.js'
 
 export const getSig = asyncHandler(async(req,res) => {
     const instituteId  = req.body.instituteID;  
@@ -12,7 +13,7 @@ export const getSig = asyncHandler(async(req,res) => {
 })
 
 export const apply = asyncHandler(async(req,res) => {
-    const {userID, sigID}  = req.body;
+    const {userID, sigID, clubID}  = req.body;
     console.log({userID, sigID})
     const exists = await Application.findOne({ username: userID, sigID: sigID})
     console.log(exists)
@@ -25,9 +26,11 @@ export const apply = asyncHandler(async(req,res) => {
         res.status(404).send({msg: "No Rounds Registered"})
         throw new Error ("No Rounds Registered")
     }
+    const club = await Club.findOne({_id: clubID})
     const success = await Application.create({
         username: userID,
         sigID: sigID,
+        clubName: club.name,
         status: {
             roundID: rounds._id,
             status: 1
